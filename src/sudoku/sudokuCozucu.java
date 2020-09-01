@@ -11,19 +11,14 @@ public class sudokuCozucu
 		this.tablo = tablo;
 	}
 	
-	public void arayuzTablosu()
-	{
-		
-	}
-	
-	//Ana fonksiyon Cözücü
-	//Geri dönümü tablo cinsinden olacak
+	//Ana fonksiyon CÃ¶zÃ¼cÃ¼
+	//Geri dÃ¶nÃ¼mÃ¼ tablo cinsinden olacak
 	public int[] coz()
 	{
 		boolean bitti = false;
 		int sayac=0;
 		
-		while(!bitti) // standart döngü
+		while(!bitti) // standart dÃ¶ngÃ¼
 		{
 			sayac=0;
 			for(int i = 0 ; i < 81 ; i++)
@@ -42,13 +37,13 @@ public class sudokuCozucu
 			for(int i = 0 ; i < 81 ; i ++)
 			{
 				
-				if(tablo[i]==0) // sadece tablonun boş elemanlarını dolduracaz değilmi
+				if(tablo[i]==0) // sadece tablonun boÅŸ elemanlarÄ±nÄ± dolduracaz deÄŸilmi
 				{
 					int deger = sonKontrolcu(grupBul(yatayYonBul(i), dikeyYonBul(i)), yatayKontrolcu(i), dikeyKontrolcu(i));
-					if(deger != -1) //eğer geri dönüş -1 ise birden fazla olasılık var işimizi şansa bırakamayız
+					if(deger != -1) //eÄŸer geri dÃ¶nÃ¼ÅŸ -1 ise birden fazla olasÄ±lÄ±k var iÅŸimizi ÅŸansa bÄ±rakamayÄ±z
 					{
 						tablo[i] = deger;
-						System.out.printf("tablo %d değeri %d ile değiştirildi oye\n",i,deger);
+						System.out.printf("tablo %d deÄŸeri %d ile deÄŸiÅŸtirildi oye\n",i,deger);
 					}
 				}		
 			}
@@ -57,9 +52,9 @@ public class sudokuCozucu
 	}
 	
 	
-	//Hangi grupta olduğunu bulmak için
-	//Çünkü sudokuda aynı tablodaki sayılar aynı olmamalı felan filan :)
-	//a grup üsten ilk b orta c ise sondaki tablo
+	//Hangi grupta olduÄŸunu bulmak iÃ§in
+	//Ã‡Ã¼nkÃ¼ sudokuda aynÄ± tablodaki sayÄ±lar aynÄ± olmamalÄ± felan filan :)
+	//a grup Ã¼sten ilk b orta c ise sondaki tablo
 	private int yatayYonBul(int i)
 	{
 		i+=1;
@@ -78,8 +73,8 @@ public class sudokuCozucu
 		else
 		{return -1;}
 	}
-	//Üstekinin aynısı işte
-	//a ise soldaki b orta c sağdaki tablo
+	//Ãœstekinin aynÄ±sÄ± iÅŸte
+	//a ise soldaki b orta c saÄŸdaki tablo
 	private int dikeyYonBul(int i)
 	{
 		i += 1;
@@ -100,30 +95,30 @@ public class sudokuCozucu
 			return -1;
 		}
 	}
-	// yatay ve dikeyi birleştirerek tam konumu bulur bkz: sağ üst tablo :	7  8  9
+	// yatay ve dikeyi birleÅŸtirerek tam konumu bulur bkz: saÄŸ Ã¼st tablo :	7  8  9
 	//																		16 17 18
 	//																		25 26 27
 	private int[] grupBul(int yatay,int dikey)
 	{
 		int[] grup = new int[9];
 		
-		int[][] yatayAralık = {{1,27} , {28,54}, {55,81}}; //a b ve c 'nin yatay aralığı
-		int[][] dikeyAralık = {{1,2,3} ,{4,5,6}, {7,8,0}};
+		int[][] yatayAralÄ±k = {{1,27} , {28,54}, {55,81}}; //a b ve c 'nin yatay aralÄ±ÄŸÄ±
+		int[][] dikeyAralÄ±k = {{1,2,3} ,{4,5,6}, {7,8,0}};
 		
 		if(yatay == -1)
 			System.out.println("HATA YATAY");
 		if(dikey == -1)
 			System.out.println("HATA DIKEY");
 		
-		int grupIndıs=0;
-		for(int i = yatayAralık[yatay][0] ; i <= yatayAralık[yatay][1]; i++)
+		int grupIndÄ±s=0;
+		for(int i = yatayAralÄ±k[yatay][0] ; i <= yatayAralÄ±k[yatay][1]; i++)
 		{
 			for(int j = 0 ; j < 3 ; j++)
 			{
-				if(dikeyAralık[dikey][j] == i%9)
+				if(dikeyAralÄ±k[dikey][j] == i%9)
 				{
-					grup[grupIndıs] = i;
-					grupIndıs++;
+					grup[grupIndÄ±s] = i;
+					grupIndÄ±s++;
 				}
 			}
 		}
@@ -136,18 +131,18 @@ public class sudokuCozucu
 		return tabloGrup;
 	}
 	
-	//Sayının yukarısındaki ve aşasındaki sayıları daha sonra işlenmek üzere hafızaya alır
+	//SayÄ±nÄ±n yukarÄ±sÄ±ndaki ve aÅŸasÄ±ndaki sayÄ±larÄ± daha sonra iÅŸlenmek Ã¼zere hafÄ±zaya alÄ±r
 	private int[] dikeyKontrolcu(int index)
 	{
 		int[] arabellek = new int[9];
 		int arabellekIndex = 0;
-		//yukarı
+		//yukarÄ±
 		for(int i = index ; i >= 0 ; i-=9)
 		{
 			arabellek[arabellekIndex] = tablo[i];
 			arabellekIndex++;
 		}
-		//asagı
+		//asagÄ±
 		for(int i = index+9 ; i < 81 ; i+=9)
 		{
 			arabellek[arabellekIndex] = tablo[i];
@@ -156,7 +151,7 @@ public class sudokuCozucu
 		
 		return arabellek;
 	}
-	//Sayının sağındaki ve solundaki sayıları daha sonra işlenmek üzere hafızaya alır
+	//SayÄ±nÄ±n saÄŸÄ±ndaki ve solundaki sayÄ±larÄ± daha sonra iÅŸlenmek Ã¼zere hafÄ±zaya alÄ±r
 	private int[] yatayKontrolcu(int index)
 	{
 		int[] arabellek = new int[9];
@@ -185,8 +180,8 @@ public class sudokuCozucu
 		return arabellek;
 	}
 	
-	//Gelen değerleri kontrol eder
-	//dikey yatay çizgileri ve grubunda olan sayıları yazar eğer bulunmayan tek karakter varsa yazılır yoksa devamke
+	//Gelen deÄŸerleri kontrol eder
+	//dikey yatay Ã§izgileri ve grubunda olan sayÄ±larÄ± yazar eÄŸer bulunmayan tek karakter varsa yazÄ±lÄ±r yoksa devamke
 	private int sonKontrolcu(int[] grup,int[] yatay , int [] dikey)
 	{
 		int[] geriDonus = new int[9];
